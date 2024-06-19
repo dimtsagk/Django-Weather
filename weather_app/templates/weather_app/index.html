@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>DimTsagk's Weather App</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: #550585; 
+            linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.08) 75%),
+            linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25%, transparent 75%, rgba(255, 255, 255, 0.08) 75%);
+            background-image: url('{% static 'img/bg.jpg'%}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+            font-size: 1.1em;
+            padding-top: 30px;
+
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        label, input, button {
+            margin: 5px 0;
+        }
+
+        footer {
+            background-color: #;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 70px;
+        }
+        
+        a:link {
+            color: green;
+            background-color: transparent;
+            text-decoration: none;
+          }
+          
+          a:visited {
+            color: orange;
+            background-color: transparent;
+            text-decoration: none;
+          }
+          
+          a:hover {
+            color: lime;
+            background-color: transparent;
+            text-decoration: underline;
+          }
+
+        
+    </style>
+
+</head>
+<body>
+    
+    <h1>Today's Weather</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="city">Enter a City 😊:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Search Weather</button>
+    </form>
+
+    {% if city %}
+        <h2>Weather in {{ city }}, {{ region }}, {{ country }}</h2>
+        <img src="{{ icon }}" alt="Weather Icon">  
+        <p><u>Temperature:</u> {{ temperature }}°C ( {{ temperaturef }}℉)</p>
+        <p><u>Condition:</u> {{ description }}</p>
+        <p><u>Humidity:</u> {{ humidity }} %</p>
+        <p><u>Date & Local Time:</u> {{ localtime }}</p>
+        
+    {% endif %}
+
+<footer>
+    © 2024 Dimitris K. Tsagkaris. Django Weather Project. Data by <a href="https://www.weatherapi.com">WeatherAPI</a>.
+</footer>    
+</body>
+</html>
