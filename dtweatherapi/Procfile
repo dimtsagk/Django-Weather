@@ -1,0 +1,1 @@
+web: gunicorn dtweatherapi.wsgi:application
